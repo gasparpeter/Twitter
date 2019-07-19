@@ -24,11 +24,11 @@ form.addEventListener('submit', (event) => {
     loadingElement.style.display = '';
     fetch(API_URL, {
         method: 'POST',
-        body: mew,
+        body: JSON.stringify(mew),
         headers: {
-            'content-type': 'server/package-lock.json'
+            'content-type': 'application.json'
         }
-    })
+    });
 
 });
 

@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const monk = require('monk');
 const Filter = require('bad-words');
-
+const rateLimit = require('express-rate-limit');
 
 const app = express();
 
@@ -13,7 +13,10 @@ const filter = new Filter();
 
 app.use(cors());
 app.use(express.json());
-
+app.use(rateLimit({
+    windowMs: 30 * 1000,
+    max: 1
+}));
 
 app.get('/', (req, res) => {
     res.json({

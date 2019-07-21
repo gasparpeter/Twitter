@@ -4,7 +4,9 @@ const form = document.querySelector('form');
 const loadingElement = document.querySelector('.loading');
 const API_URL = 'http://localhost:5000/mews';
 
-loadingElement.style.display = 'none';
+loadingElement.style.display = '';
+
+listAllMews();
 
 form.addEventListener('submit', (event) => {
     event.preventDefault();
@@ -32,8 +34,16 @@ form.addEventListener('submit', (event) => {
     }).then(response => response.json())
       .then(createdMew => {
           console.log(createdMew);
+          form.reset();
           form.style.display = '';
           loadingElement.style.display = 'none';
   });
 });
 
+function listAllMews() {
+    fetch(API_URL)
+        .then(response => response.json())
+        .then(mews => {
+            console.log(mews);
+        })
+}
